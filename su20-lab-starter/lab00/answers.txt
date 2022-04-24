@@ -1,4 +1,5 @@
-1. find
-2. ps
-3. kill
-4. diff
+1. ls -l
+2. find
+3. ps
+4. kill
+5. diff
