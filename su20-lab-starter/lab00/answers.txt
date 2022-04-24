@@ -1,8 +1,9 @@
-1. mv
-2. chmod
-3. ls
-4. ping
-5. find
-6. ps
-7. kill
-8. diff
+1. ls -l
+2. mv
+3. chmod
+4. ls
+5. ping
+6. find
+7. ps
+8. kill
+9. diff
