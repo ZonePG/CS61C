@@ -1,9 +1,9 @@
-1. set args -parameter1 -parameter2
+1. set args
 2. b
 3. n
 4. s
-5. use the continue command, or step , or any other command that resumes execution.
-6. print expr
+5. c
+6. print
 7. display
-8. info variables
+8. info
 9. q
