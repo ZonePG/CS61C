@@ -7,16 +7,16 @@
  */
 HashTable *createHashTable(int size, unsigned int (*hashFunction)(void *),
                            int (*equalFunction)(void *, void *)) {
-  int i = 0;
-  HashTable *newTable = malloc(sizeof(HashTable));
-  newTable->size = size;
-  newTable->data = malloc(sizeof(struct HashBucket *) * size);
-  for (i = 0; i < size; ++i) {
-    newTable->data[i] = NULL;
-  }
-  newTable->hashFunction = hashFunction;
-  newTable->equalFunction = equalFunction;
-  return newTable;
+    int i = 0;
+    HashTable *newTable = malloc(sizeof(HashTable));
+    newTable->size = size;
+    newTable->data = malloc(sizeof(struct HashBucket *) * size);
+    for (i = 0; i < size; ++i) {
+        newTable->data[i] = NULL;
+    }
+    newTable->hashFunction = hashFunction;
+    newTable->equalFunction = equalFunction;
+    return newTable;
 }
 
 /*
@@ -28,20 +28,47 @@ HashTable *createHashTable(int size, unsigned int (*hashFunction)(void *),
  * we can use the string as both the key and data.
  */
 void insertData(HashTable *table, void *key, void *data) {
-  // -- TODO --
-  // HINT:
-  // 1. Find the right hash bucket location with table->hashFunction.
-  // 2. Allocate a new hash bucket struct.
-  // 3. Append to the linked list or create it if it does not yet exist. 
+    // -- TODO --
+    // HINT:
+    // 1. Find the right hash bucket location with table->hashFunction.
+    // 2. Allocate a new hash bucket struct.
+    // 3. Append to the linked list or create it if it does not yet exist.
+    unsigned int location = table->hashFunction(key) % table->size;
+    struct HashBucket *bucket = table->data[location];
+
+    struct HashBucket *newBucket =
+        (struct HashBucket *)malloc(sizeof(struct HashBucket));
+    newBucket->key = key;
+    newBucket->data = data;
+    newBucket->next = NULL;
+
+    if (bucket == NULL) {
+        table->data[location] = newBucket;
+    } else {
+        while (bucket->next != NULL) {
+            bucket = bucket->next;
+        }
+        bucket->next = newBucket;
+    }
 }
 
 /*
  * This returns the corresponding data for a given key.
- * It returns NULL if the key is not found. 
+ * It returns NULL if the key is not found.
  */
 void *findData(HashTable *table, void *key) {
-  // -- TODO --
-  // HINT:
-  // 1. Find the right hash bucket with table->hashFunction.
-  // 2. Walk the linked list and check for equality with table->equalFunction.
+    // -- TODO --
+    // HINT:
+    // 1. Find the right hash bucket with table->hashFunction.
+    // 2. Walk the linked list and check for equality with table->equalFunction.
+    unsigned int location = table->hashFunction(key) % table->size;
+    struct HashBucket *bucket = table->data[location];
+
+    while (bucket != NULL) {
+        if (table->equalFunction(key, bucket->key)) {
+            return bucket->data;
+        }
+        bucket = bucket->next;
+    }
+    return NULL;
 }
