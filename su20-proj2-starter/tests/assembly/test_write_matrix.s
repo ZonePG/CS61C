@@ -6,8 +6,20 @@ m0: .word 1, 2, 3, 4, 5, 6, 7, 8, 9 # MAKE CHANGES HERE TO TEST DIFFERENT MATRIC
 file_path: .asciiz "outputs/test_write_matrix/student_write_outputs.bin"
 
 .text
+
+# int main() {
+#     write_matrix(file_path, m0, 3, 3);
+#     return 0;
+# }
+
 main:
     # Write the matrix to a file
+    la a0 file_path
+    la a1 m0
+    li a2 3
+    li a3 3
+    jal write_matrix
 
 
     # Exit the program
+    jal exit
