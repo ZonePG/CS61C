@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <time.h>
+#include <math.h>
+#include <stdlib.h>
+
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 /* The naive transpose function as a reference. */
 void transpose_naive(int n, int blocksize, int *dst, int *src) {
@@ -16,6 +20,17 @@ void transpose_naive(int n, int blocksize, int *dst, int *src) {
  * multiple of the block size. */
 void transpose_blocking(int n, int blocksize, int *dst, int *src) {
     // YOUR CODE HERE
+    for (int split_x = 0; split_x < n; split_x += blocksize) {
+        for (int split_y = 0; split_y < n; split_y += blocksize) {
+            int bounded_x = MIN(split_x + blocksize, n);
+            for (int x = split_x; x < bounded_x; x++) {
+                int bounded_y = MIN(split_y + blocksize, n);
+                for (int y = split_y; y < bounded_y; y++) {
+                    dst[y + x * n] = src[x + y * n];
+                }
+            }
+        }
+    }
 }
 
 void benchmark(int *A, int *B, int n, int blocksize,

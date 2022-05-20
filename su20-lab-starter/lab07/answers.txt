@@ -1,51 +1,51 @@
 Exercise 1
 	Scenario 1
-		1. 
-		2.
-		3.
+		1. Because step size in bytes (32) is exactly equal to cache size in bytes (32).
+		2. 0. always mapped to first block
+		3. Change step size to 1 (2 is not correctly answer, becase step size is equal to block size in bytes 8)
 
 	Scenario 2
-		1.
-		2.
-		3.
-		4.
-		5.
+		1. 2
+		2. Miss, Hit, Hit, Hit
+		3. 0.75
+		4. closed to 1, all data has been cached after first time.
+		5. array size in bytes should equal to cache size in bytes, and for block it should not evict for every first access.
 
 	Scenario 3
-		1.
-		2.
-		3.
-		4.
-		5.
+		1. 50%, 0%, 50%
+		2. 32, 16
+		3. 16, L1 cache miss then access L2 cache
+		4. block size
+		5. block num does not effect, block size increase will increase L1 hit rate, but L2 hit rate does not change.
 
 Exercise 2
-	ijk:
-	ikj:
-	jik:
-	jki:
-	kij:
-	kji:
+	ijk:    2.180 Gflop/s
+	ikj:    4.250 Gflop/s
+	jik:    2.272 Gflop/s
+	jki:    24.820 Gflop/s
+	kij:    4.234 Gflop/s
+	kji:    19.811 Gflop/s
 
-	1.
-	2.
-	3.
+	1. jki
+	2. ijk
+	3. more stride results in worse performance.
 
 Exercise 3
 	Part 1
-		blocksize = 20, n = 100: 
-		blocksize = 20, n = 1000: 
-		blocksize = 20, n = 2000: 
-		blocksize = 20, n = 5000: 
-		blocksize = 20, n = 10000: 
+		blocksize = 20, n = 100: 0.01 ms 0.014 ms
+		blocksize = 20, n = 1000: 2.1 ms 0.865 ms
+		blocksize = 20, n = 2000: 4.322 ms 3.127 ms
+		blocksize = 20, n = 5000: 86.805 ms 25.716 ms
+		blocksize = 20, n = 10000: 385.119 ms 113.22 ms
 
-		1.
-		2.
+		1. n larger than 1000
+		2. matrix less than cache size, then non-cache block faster.
 
 	Part 2
-		blocksize = 50, n = 10000:
-		blocksize = 100, n = 10000:
-		blocksize = 500, n = 10000:
-		blocksize = 1000, n = 10000:
-		blocksize = 5000, n = 10000:
+		blocksize = 50, n = 10000: 303.907 ms 73.673 ms
+		blocksize = 100, n = 10000: 310.733 ms 68.103 ms
+		blocksize = 500, n = 10000: 297.538 ms 85.411 ms
+		blocksize = 1000, n = 10000: 295.279 ms 80.675 ms
+		blocksize = 5000, n = 10000: 401.453 ms 483.54 ms
 
-		1.
+		1. block size is larger than cache size then slower
