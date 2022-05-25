@@ -20,16 +20,17 @@ int main() {
 	for(int i=0; i<ARRAY_SIZE; i++)
 		serial_result += x[i] * y[i];
 
-	int num_threads = omp_get_max_threads();
+	// int num_threads = omp_get_max_threads();
+	int num_threads = 4;
 
 	// Only run this once because it's too slow..
-	omp_set_num_threads(1);
+	omp_set_num_threads(2);
 	start_time = omp_get_wtime();
 	for(int j=0; j<REPEAT; j++) {
 		result = dotp_naive(x, y, ARRAY_SIZE);
 	}
 	naive = omp_get_wtime() - start_time;
-	printf("Naive: 1 thread took %f seconds\n",naive);
+	printf("Naive: 2 thread took %f seconds\n",naive);
 
 	// Test framework that sweeps the number of threads and times each ru
 	for (int i=1; i<=num_threads; i++) {
